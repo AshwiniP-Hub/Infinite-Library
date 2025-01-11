@@ -11,18 +11,12 @@ const bookSchema = new mongoose.Schema({
    popular: { type: Boolean, default: false }, // New field
 });
 
-
-// const wishlistSchema = new mongoose.Schema({
-//     books: [bookSchema],
-//   });
-
 const wishlistSchema = new mongoose.Schema({
   books: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Book' }],
 });
 
 // Create the model  
 const Wishlist = mongoose.model("Wishlist", wishlistSchema);
-
 
 
 // Export the model
