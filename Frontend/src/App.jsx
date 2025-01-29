@@ -7,12 +7,12 @@ import RequestBook from './requestbook/RequestBooks';
 import Children from './children/Childrenb';
 import Education from './education/Educationb';
 import Fiction from './fiction/Fictionb';
-import Nonfictionb from './nonfiction/Nonfictionb';
 import Login from './components/Login';
 import Bestseller from './components/Bestseller';
 import Signup from './components/Signup';
 import Wishlist from './wishlist/Wishlist';
 import Cart from './cart/Carts';
+import Nonfictions from './nonfiction/Nonfictions';
 
 
 const App = () => {
@@ -26,7 +26,7 @@ const App = () => {
         <Route path="/Children" element={<Children />} />
         <Route path="/Education" element={<Education />} />
         <Route path="/Fiction" element={<Fiction />} />
-        <Route path="/NonFiction" element={<Nonfictionb/>} />
+        <Route path="/NonFiction" element={<Nonfictions/>} />
         <Route path="/Login" element={<Login />} />
         <Route path="/Bestseller" element={<Bestseller />} />
         <Route path="/Signup" element={<Signup/>} />
