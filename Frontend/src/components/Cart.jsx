@@ -10,7 +10,7 @@ const Cart = () => {
         <img src={cart} alt="error" className='size-48 mt-4' />
         </div>
         <div>
-        <h1 className='text-xl mt-4'>Your Cart is empty. Browse now and pick something you love!</h1>
+        <h1 className='md:text-xl text-xs md:mt-4 mt-5'>Your Cart is empty. Browse now and pick something you love!</h1>
         </div>
         <div>
              <Link to='/'> <button className='bg-rose-500 rounded-md text-xl  px-4 py-1 mt-4 mb-4'>Shop Now</button></Link>
