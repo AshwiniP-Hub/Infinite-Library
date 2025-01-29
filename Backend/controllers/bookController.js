@@ -11,4 +11,4 @@ const addBook = async (req, res) => {
   res.status(201).json(newBook);
 };
 
-module.exports = { getBooks, addBook, getTrendingBooks};
+module.exports = { getBooks, addBook};

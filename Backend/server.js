@@ -1,27 +1,25 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
-// const bcrypt = require('bcrypt');
-const mongoose = require('mongoose');
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const connectDB = require('./config/db');
-const dotenv = require('dotenv');
+// const connectDB = require('./config/db');
+// const dotenv = require('dotenv');
 const booksRoutes = require('./routes/booksRoutes');
 const cloudinary = require('./config/cloudinary');
 const upload = require('./middlewares/multer');
-const jwt = require('jsonwebtoken');
 const userRoutes = require('./routes/userRoutes');
 const wishlistRoutes = require('./routes/wishlistRoutes');
-
-
+const cartRoutes = require('./routes/cartRoutes');
 const app = express();
+const port = process.env.PORT || 5000;
 
 // Load environment variables
 require("dotenv").config();
-dotenv.config();
+
 
 // Connect to MongoDB
-connectDB();
+// connectDB();
 
 
 // Middleware
@@ -33,9 +31,8 @@ app.use(express.urlencoded({ extended: true })); // To handle form-data submissi
 // API Routes
 app.use('/api', booksRoutes); // Prefix all routes in booksRoutes with '/api'
 app.use('/user', userRoutes);
-app.use('/api',wishlistRoutes);
-
-
+app.use('/api', wishlistRoutes);
+app.use('/api/cart', cartRoutes)
 
 // Serve static files
 app.use('/uploads', express.static('uploads'));
@@ -70,6 +67,15 @@ app.post('/upload', upload.single('image'), async (req, res) => {
 app.get('/', (req, res) => {
   res.send('API is running...');
 });
+
+// Database connection
+mongoose
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("Connected to MongoDB Atlas"))
+  .catch((error) => console.error("MongoDB connection error:", error));
 
 // Start the Server
 const PORT = process.env.PORT || 5000;

@@ -1,70 +1,58 @@
 import React from 'react'
-import instagram from "../../public/Images/instagram.png"
-import facebook from "../../public/Images/facebook.png"
-import twitter from "../../public/Images/twitter.png"
-import books from "../../public/Images/books.png"
-import delivery from "../../public/Images/delivery.png"
-import quality from "../../public/Images/quality.png"
-import price from "../../public/Images/price.png"
+import { Link } from 'react-router-dom';
 import logo from "../../public/Images/logo.png"
-
-
+import { FaInstagramSquare } from "react-icons/fa";
+import { FaFacebookSquare } from "react-icons/fa";
+import { FaSquareXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
-  return (
-   <>
-   <div className='p-5 bg-slate-200'>
-        {/* logo  */}
-        <div className='flex flex-col justify-center items-center'>
-                <img src={logo} alt="logo" className='size-32' />
-                <div className='flex items-center font-bold text-2xl uppercase text-pink-500'>Infinite Library</div>
-        </div>
-        {/* button  */}
-        <div className='flex justify-center m-5'>
-                <button className='mx-2 px-8 py-2  border-none rounded-3xl  bg-pink-500 font-bold text-lg text-white hover:-translate-y-2 duration-150 hover:bg-blue-600 '>Contact Us</button>
-                </div>
-        {/* icons  */}
-        <div className='flex justify-center m-8 gap-6 font-semibold'> 
-        <div>
-                <div><img src={books} alt="books img" className='size-16 mx-4' /></div>
-                <div>Millions of Books</div>
-        </div>
-        <div>
-                <div><img src={quality} alt="books img" className='size-16 mx-4' /></div>
-                <div>Genuine Books</div>
-        </div>
-        <div>
-                <div><img src={price} alt="books img" className='size-16 mx-2' /></div>
-                <div>Great Pricing</div>
-        </div>
-        <div>
-                <div><img src={delivery} alt="books img" className='size-16 mx-4' /></div>
-                <div>Faster Delivery</div>
-        </div>
-        </div>
-   
-        {/* connect with us  */}
-        <div className='flex justify-center font-semibold'>
-                <p>Coonect With Us</p>
-        </div>
-        <div className=' flex justify-center m-4 gap-6'>
-            <a href="https://www.instagram.com/" target="_blank">
-                    <img src={instagram} alt="errror" className='size-10'  />
-            </a>
-            <a href="https://www.facebook.com/" target="_blank">
-                    <img src={facebook} alt="errror" className='size-10'/>
-            </a>
-            <a href="https://x.com/i/flow/login" target="_blank">
-                    <img src={twitter} alt="errror" className='size-10'/>
-            </a>     
-        </div>
-        {/* for line  */}
-        <hr  />
-        {/* copyright  */}
-        <div className='flex justify-center py-4 font-semibold'>CopyRight @ 2024 by Infinte Library</div>
-   </div>
-   </>
-  )
+        return (
+                <>
+
+                 <div className="footer flex flex-col md:flex-row justify-center items-center md:justify-between md:px-10 px-10 bg-base-200 md:pt-10 md:pb-10 pb-10 pt-4" >
+                         {/* <footer className="footer  md:px-10 px-10 bg-base-200 md:pt-10 md:pb-10 pt-4 "> */}
+                                <div className='flex flex-col  justify-center  items-center'>
+                                        <img src={logo} alt="logo" className='md:size-24 size-10' />
+                                        <div className=' font-bold md:text-2xl text-xs uppercase text-pink-500'>Infinite Library</div>
+                                </div>
+                                <div>
+                                <h6 className="footer-title">Finds</h6>
+                                      <Link className="link link-hover" to="/" >About us</Link> 
+                                      <Link className="link link-hover" to="/" >Payments</Link> 
+                                        <Link className="link link-hover" to="/help-center" >Help center</Link> 
+                                        <Link className="link link-hover" to="/RequestBook" >Request book</Link> 
+                                </div>
+                                <div>
+                                <h6 className="footer-title">Categaries</h6>
+                                       <Link className="link link-hover" to="/Fiction" > Fiction</Link> 
+                                        <Link className="link link-hover" to="/NonFiction" >Non-Fiction</Link> 
+                                               <Link className="link link-hover" to="/Children" > Children</Link> 
+                                                <Link className="link link-hover" to="/Education" >Education</Link> 
+                                                </div>
+                                        <div>
+                                                <h6 className="footer-title">Social</h6>
+                                                <div className=' flex justify-center gap-2'>
+                                                        <a href="https://www.instagram.com/" target="_blank">
+                                                                <FaInstagramSquare className='size-7 text-slate-500' />
+                                                        </a>
+                                                        <a href="https://www.facebook.com/" target="_blank">
+                                                                <FaFacebookSquare className='size-7 text-slate-500' />
+                                                        </a>
+                                                        <a href="https://x.com/i/flow/login" target="_blank">
+                                                                <FaSquareXTwitter className='size-7 text-slate-500' />
+                                                        </a>
+                                                </div>
+                                                </div>
+                         {/* </footer> */}
+                         </div>
+                                <footer className="footer footer-center  bg-base-300 text-base-content p-4">
+                                        <aside>
+                                                <p>Copyright © {new Date().getFullYear()} - All right reserved by Infinte Library Ltd</p>
+                                        </aside>
+                                </footer>
+                        
+                </>
+        )
 }
 
 export default Footer

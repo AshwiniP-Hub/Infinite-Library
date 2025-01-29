@@ -30,11 +30,11 @@ const Homepage = () => {
     <>
       <div>
         <div className='flex items-center justify-between px-4 bg-gradient-to-r from-pink-200 via-purple-500 to-orange-200 '>
-          <div><img src={book} alt="img" className='size-24' /></div>
-          <div className='text-3xl font-semibold uppercase font-serif'>Find your next great read at our
+          <div className="hidden lg:block"><img src={book} alt="img" className='size-24' /></div>
+          <div className='md:text-3xl text-xs m-4 font-semibold uppercase font-serif'>Find your next great read at our
             <span className='text-rose-700 font-bold uppercase'> Infinite Library</span>
           </div>
-          <div><img src={girl} alt="img" className='size-24' /></div>
+          <div className="hidden lg:block"><img src={girl} alt="img" className='size-24' /></div>
         </div>
         {/* Carousel  */}
         <div>

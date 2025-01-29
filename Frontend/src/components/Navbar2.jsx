@@ -6,18 +6,6 @@ const Navbar2 = () => {
   const [user, setUser] = useState(null);
   const [bgColor, setBgColor] = useState("");
 
-  // useEffect(() => {
-  //   // Retrieve user data from localStorage
-  //   const storedUser = JSON.parse(localStorage.getItem("Users"));
-  //   if (storedUser) {
-  //     setUser(storedUser);
-
-  //     // Generate a random background color
-  //     const randomColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
-  //     setBgColor(randomColor);
-  //   }
-  // }, []);
-
   useEffect(() => {
     try {
       // Retrieve user data from localStorage
@@ -37,8 +25,6 @@ const Navbar2 = () => {
     }
   }, []);
   
-
-
   const handleLogout = () => {
     localStorage.removeItem("Users");
     setUser(null);
@@ -58,19 +44,19 @@ const Navbar2 = () => {
 
   return (
     <>
-      <div className="navbar bg-base-100">
+      <div className="navbar bg-base-100 px-4 sm:px-8 md:px-12 lg:px-16">
         <div className="navbar-start">
-        {/* bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 text-transparent bg-clip-text */}
-        <img src={logo} alt="logo" className="size-14" />
-          <a className="btn btn-ghost text-4xl uppercase bg-gradient-to-r from-purple-600
-           via-pink-700 to-red-500 font-extrabold  text-transparent bg-clip-text ">Infinite Library</a>
+        <img src={logo} alt="logo" className="size-14 w-8 h-8 sm:w-10 sm:h-10 mr-2" />
+          <a className="btn btn-ghost text-xl  sm:text-3xl md:text-4xl uppercase bg-gradient-to-r from-purple-600
+           via-pink-700 to-red-500 font-extrabold text-transparent bg-clip-text">Infinite Library</a>
         </div>
         <div className="navbar-end">
           {user ? (
             <div className="dropdown dropdown-end">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                 <div
-                  className="w-10 h-10 flex items-center justify-center rounded-full text-white text-center text-2xl font-bold"
+                  className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-full border-2
+                   text-black border-black text-center text-lg sm:text-xl font-bold"
                   style={{ backgroundColor: bgColor }}
                 >
                   {getUserInitial()}
@@ -78,7 +64,7 @@ const Navbar2 = () => {
               </label>
               <ul
                 tabIndex={0}
-                className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
+                className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-40 sm:w-52"
                 style={{ zIndex: 1000 }}
               >
                 <li>
@@ -91,7 +77,7 @@ const Navbar2 = () => {
             </div>
           ) : (
             <a
-              className="btn bg-green-500 text-xl text-center"
+              className="btn bg-green-500 text-sm sm:text-base  text-center px-4 sm:px-6 md:text-xl "
               onClick={() => document.getElementById("my_modal_3").showModal()}
             >
               Login

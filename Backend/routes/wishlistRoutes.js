@@ -1,95 +1,81 @@
-const express = require('express');
+const express = require("express");
+const Wishlist = require("../models/Wishlist");
+const jwt = require("jsonwebtoken");
+
 const router = express.Router();
-const Wishlist = require('../models/Wishlist'); // Import Wishlist model
-const Book = require('../models/Book'); // Import Book model
+const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret_key';
 
-// Add a book to the wishlist
-const mongoose = require('mongoose'); // Import mongoose
+// Middleware to authenticate the user
+const authenticate = (req, res, next) => {
+  const token = req.headers.authorization?.split(" ")[1];
+  if (!token) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
 
-router.post("/wishlist", async (req, res) => {
-    const { bookId } = req.body; // Expecting `bookId` as a string
-    try {
-        // Validate Book ID
-        if (!mongoose.Types.ObjectId.isValid(bookId)) {
-            return res.status(400).json({ error: "Invalid Book ID" });
-        }
+  try {
+    const decoded = jwt.verify(token, JWT_SECRET);
+    req.userId = decoded.id; // Add userId to the request object
+    next();
+  } catch (error) {
+    res.status(401).json({ message: "Invalid token" });
+  }
+};
 
-        const bookObjectId = new mongoose.Types.ObjectId(bookId);
-
-        // Check if the book exists in the database
-        const book = await Book.findById(bookObjectId);
-        if (!book) {
-            return res.status(404).json({ error: "Book not found" });
-        }
-
-        // Find the wishlist or create a new one
-        let wishlist = await Wishlist.findOne();
-        if (!wishlist) {
-            wishlist = new Wishlist({ books: [] });
-        }
-
-        // Check if the book is already in the wishlist
-        if (wishlist.books.includes(book._id)) {
-            return res.status(400).json({ message: "Book is already in the wishlist" });
-        }
-
-        // Add the book's ObjectId to the wishlist
-        wishlist.books.push(book._id);
-    
-        await wishlist.save();
-        res.status(200).json(wishlist);
-    } catch (error) {
-        console.error("Error adding book to wishlist:", error.message); // Log the error for debugging
-        res.status(500).json({ error: "Internal Server Error" });
-    }
+// Get todos for the logged-in user
+router.get("/", authenticate, async (req, res) => {
+  try {
+    const wishlist = await Todo.find({ userId: req.userId });
+    res.json(wishlist);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
 });
 
-
-
-router.get("/wishlist", async (req, res) => {
-    try {
-        // Populate the books in the wishlist to get detailed book information
-        const wishlist = await Wishlist.findOne().populate('books');
-        res.status(200).json(wishlist || { books: [] });
-    } catch (error) {
-        console.error("Error fetching wishlist:", error);
-        res.status(500).json({ error: "Internal Server Error" });
-    }
+// Create a new todo
+router.post("/", authenticate, async (req, res) => {
+  const wishlist = new Wishlist({
+    text: req.body.text,
+    userId: req.userId, // Associate todo with the logged-in user
+  });
+  try {
+    const newwishlist = await wishlist.save();
+    res.status(201).json(newwishlist);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
 });
 
-// Delete a book from the wishlist
-router.delete("/wishlist", async (req, res) => {
-    const { bookId } = req.body; // Expecting `bookId` as a string
-    try {
-        // Validate Book ID
-        if (!mongoose.Types.ObjectId.isValid(bookId)) {
-            return res.status(400).json({ error: "Invalid Book ID" });
-        }
-
-        const bookObjectId = new mongoose.Types.ObjectId(bookId);
-
-        // Find the wishlist
-        let wishlist = await Wishlist.findOne();
-        if (!wishlist) {
-            return res.status(404).json({ error: "Wishlist not found" });
-        }
-
-        // Check if the book is in the wishlist
-        const bookIndex = wishlist.books.indexOf(bookObjectId);
-        if (bookIndex === -1) {
-            return res.status(404).json({ error: "Book not found in wishlist" });
-        }
-
-        // Remove the book from the wishlist
-        wishlist.books.splice(bookIndex, 1);
-        await wishlist.save();
-
-        res.status(200).json(wishlist);
-    } catch (error) {
-        console.error("Error deleting book from wishlist:", error.message); // Log the error for debugging
-        res.status(500).json({ error: "Internal Server Error" });
+// Update a todo
+router.put("/:id", authenticate, async (req, res) => {
+  try {
+    const wishlist = await Wishlist.findOneAndUpdate(
+      { _id: req.params.id, userId: req.userId }, // Ensure the todo belongs to the logged-in user
+      { completed: req.body.completed },
+      { new: true }
+    );
+    if (!wishlist) {
+      return res.status(404).json({ message: "wishlist not found" });
     }
+    res.json(wishlist);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
 });
 
+// Delete a todo
+router.delete("/:id", authenticate, async (req, res) => {
+  try {
+    const todo = await wishlist.findOneAndDelete({
+      _id: req.params.id,
+      userId: req.userId, // Ensure the todo belongs to the logged-in user
+    });
+    if (!wishlist) {
+      return res.status(404).json({ message: "wishlist not found" });
+    }
+    res.json({ message: "wishlist deleted" });
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
 
 module.exports = router;
