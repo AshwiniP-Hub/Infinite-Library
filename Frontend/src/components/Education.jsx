@@ -7,7 +7,7 @@ const EducationBooks = () => {
   useEffect(() => {
     const fetchEducationBooks = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/education'); 
+        const response = await fetch('https://infinitelibrary.onrender.com/api/education'); 
         const data = await response.json();
         seteducationBooks(data);
       } catch (error) {

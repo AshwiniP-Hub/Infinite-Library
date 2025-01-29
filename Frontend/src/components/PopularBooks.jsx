@@ -5,7 +5,7 @@ const PopularBooks = () => {
     const [popularBooks, setPopularBooks] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/api/popular-books')
+        fetch('https://infinitelibrary.onrender.com/api/popular-books')
             .then((response) => response.json())
             .then((data) => setPopularBooks(data))
             .catch((error) => console.error('Error fetching popular books:', error));

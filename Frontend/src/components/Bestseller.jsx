@@ -16,7 +16,7 @@ const BooksList = () => {
     // Fetch books from the backend
     const fetchBooks = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/books");
+        const response = await axios.get("https://infinitelibrary.onrender.com/api/books");
         setBooks(response.data);
         setLoading(false);
       } catch (err) {
@@ -42,20 +42,7 @@ const BooksList = () => {
       {books.length === 0 ? (
         <div className="text-center">No books available.</div>
       ) : (
-        // <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        //   {books.map((book) => (
-        //     <div
-        //       key={book._id}
-        //       className="p-4 border rounded-lg shadow hover:shadow-lg"
-        //     >
-        //       <h2 className="text-xl font-semibold">{book.title}</h2>
-        //       <p className="text-gray-600">{book.author}</p>
-        //       <p className="text-sm text-gray-500">
-        //         Published: {book.publishedDate}
-        //       </p>
-        //     </div>
-        //   ))}
-        // </div>
+       
 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
               {books.map((book) => (
                 <BookCard key={book._id} book={book} />

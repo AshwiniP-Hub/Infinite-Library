@@ -7,7 +7,7 @@ const NonFictionBooks = () => {
   useEffect(() => {
     const fetchNonFictionBooks = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/non-fiction'); 
+        const response = await fetch('https://infinitelibrary.onrender.com/api/non-fiction'); 
         const data = await response.json();
         setNonFictionBooks(data);
       } catch (error) {

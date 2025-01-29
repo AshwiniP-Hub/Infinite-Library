@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { TiHeartFullOutline } from "react-icons/ti";
 import { Link } from 'react-router-dom';
-// import axios from 'axios';
-// import AddToCartButton from './Addtocartbutton';
-
 
 const BookCard = ({ book, userId }) => {
   const { _id, title, author, category, price, publisher, image } = book;

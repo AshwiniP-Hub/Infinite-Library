@@ -10,7 +10,6 @@ const Footer = () => {
                 <>
 
                  <div className="footer flex flex-col md:flex-row justify-center items-center md:justify-between md:px-10 px-10 bg-base-200 md:pt-10 md:pb-10 pb-10 pt-4" >
-                         {/* <footer className="footer  md:px-10 px-10 bg-base-200 md:pt-10 md:pb-10 pt-4 "> */}
                                 <div className='flex flex-col  justify-center  items-center'>
                                         <img src={logo} alt="logo" className='md:size-24 size-10' />
                                         <div className=' font-bold md:text-2xl text-xs uppercase text-pink-500'>Infinite Library</div>

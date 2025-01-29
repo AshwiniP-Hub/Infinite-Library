@@ -4,7 +4,7 @@ import axios from "axios";
 const AddToCartButton = ({ userId, book }) => {
   const handleAddToCart = async () => {
     try {
-      const response = await axios.post("http://localhost:5000/cart/add", {
+      const response = await axios.post("https://infinitelibrary.onrender.com/cart/add", {
         userId,
         book,
       });

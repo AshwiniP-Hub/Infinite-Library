@@ -7,7 +7,7 @@ const ChildrenBooks = () => {
     useEffect(() => {
         const fetchChildrenBooks = async () => {
             try {
-                const response = await fetch('http://localhost:5000/api/children');
+                const response = await fetch('https://infinitelibrary.onrender.com/api/children');
                 const data = await response.json();
                 setChildrenBooks(data);
             } catch (error) {

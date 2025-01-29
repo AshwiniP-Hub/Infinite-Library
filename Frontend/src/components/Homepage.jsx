@@ -18,7 +18,7 @@ const Homepage = () => {
   const handleSearch = async (query) => {
     setHasSearched(true); // Mark that a search has been performed
     try {
-      const response = await fetch(`http://localhost:5000/api/search?q=${query}`);
+      const response = await fetch(`https://infinitelibrary.onrender.com/api/search?q=${query}`);
       const data = await response.json();
       setResults(data);
     } catch (error) {

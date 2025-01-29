@@ -7,7 +7,7 @@ const FictionBooks = () => {
   useEffect(() => {
     const fetchFictionBooks = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/fiction'); // Replace with your API endpoint
+        const response = await fetch('https://infinitelibrary.onrender.com/api/fiction'); // Replace with your API endpoint
         const data = await response.json();
         setFictionBooks(data);
       } catch (error) {
