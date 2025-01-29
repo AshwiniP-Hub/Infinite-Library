@@ -7,7 +7,7 @@ import RequestBook from './requestbook/RequestBooks';
 import Children from './children/Childrenb';
 import Education from './education/Educationb';
 import Fiction from './fiction/Fictionb';
-import NonFiction from './nonfiction/Nonfictionb';
+import Nonfictionb from './nonfiction/Nonfictionb';
 import Login from './components/Login';
 import Bestseller from './components/Bestseller';
 import Signup from './components/Signup';
@@ -26,7 +26,7 @@ const App = () => {
         <Route path="/Children" element={<Children />} />
         <Route path="/Education" element={<Education />} />
         <Route path="/Fiction" element={<Fiction />} />
-        <Route path="/NonFiction" element={<NonFiction />} />
+        <Route path="/NonFiction" element={<Nonfictionb/>} />
         <Route path="/Login" element={<Login />} />
         <Route path="/Bestseller" element={<Bestseller />} />
         <Route path="/Signup" element={<Signup/>} />
